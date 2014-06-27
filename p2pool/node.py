@@ -28,7 +28,7 @@ class P2PNode(p2p.Node):
         all_new_txs = {}
         for share, new_txs in shares:
             if new_txs is not None:
-                all_new_txs.update((bitcoin_data.hash256(bitcoin_data.tx_type.pack(new_tx)), new_tx) for new_tx in new_txs)
+                all_new_txs.update((bitcoin_data.singlehash256(bitcoin_data.tx_type.pack(new_tx)), new_tx) for new_tx in new_txs)
             
             if share.hash in self.node.tracker.items:
                 #print 'Got duplicate share, ignoring. Hash: %s' % (p2pool_data.format_hash(share.hash),)
@@ -203,10 +203,10 @@ class Node(object):
             if (self.best_block_header.value is None
                 or (
                     new_header['previous_block'] == bitcoind_best_block and
-                    bitcoin_data.hash256(bitcoin_data.block_header_type.pack(self.best_block_header.value)) == bitcoind_best_block
+                    bitcoin_data.grshash256(bitcoin_data.block_header_type.pack(self.best_block_header.value)) == bitcoind_best_block
                 ) # new is child of current and previous is current
                 or (
-                    bitcoin_data.hash256(bitcoin_data.block_header_type.pack(new_header)) == bitcoind_best_block and
+                    bitcoin_data.grshash256(bitcoin_data.block_header_type.pack(new_header)) == bitcoind_best_block and
                     self.best_block_header.value['previous_block'] != bitcoind_best_block
                 )): # new is current and previous is not a child of current
                 self.best_block_header.set(new_header)
@@ -246,7 +246,7 @@ class Node(object):
         @self.factory.new_tx.watch
         def _(tx):
             new_known_txs = dict(self.known_txs_var.value)
-            new_known_txs[bitcoin_data.hash256(bitcoin_data.tx_type.pack(tx))] = tx
+            new_known_txs[bitcoin_data.singlehash256(bitcoin_data.tx_type.pack(tx))] = tx
             self.known_txs_var.set(new_known_txs)
         # forward transactions seen to bitcoind
         @self.known_txs_var.transitioned.watch

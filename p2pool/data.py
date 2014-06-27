@@ -30,7 +30,7 @@ def check_hash_link(hash_link, data, const_ending=''):
     assert len(hash_link['extra_data']) == max(0, extra_length - len(const_ending))
     extra = (hash_link['extra_data'] + const_ending)[len(hash_link['extra_data']) + len(const_ending) - extra_length:]
     assert len(extra) == extra_length
-    return pack.IntType(256).unpack(hashlib.sha256(sha256.sha256(data, (hash_link['state'], extra, 8*hash_link['length'])).digest()).digest())
+    return pack.IntType(256).unpack(sha256.sha256(data, (hash_link['state'], extra, 8*hash_link['length'])).digest())
 
 # shares
 
@@ -49,7 +49,7 @@ def load_share(share, net, peer_addr):
     else:
         raise ValueError('unknown share type: %r' % (share['type'],))
 
-DONATION_SCRIPT = '4104ffd03de44a6e11b9917f3a29f9443283d9871c9d743ef30d5eddcd37094b64d1b3d8090496b53256786bf5c82932ec23c3b74d9f05a6f95a8b5529352656664bac'.decode('hex')
+DONATION_SCRIPT = '4104470239ee73ea50d4ef935ffebe9e8900c00d079610c1c9569b3aed0794ce729ae3340a8c7f79c2dbef337a73dd9331aa4e730288006c924a97080503f99673fdac'.decode('hex')
 
 class Share(object):
     VERSION = 13
@@ -269,7 +269,7 @@ class Share(object):
         merkle_root = bitcoin_data.check_merkle_link(self.gentx_hash, self.merkle_link)
         self.header = dict(self.min_header, merkle_root=merkle_root)
         self.pow_hash = net.PARENT.POW_FUNC(bitcoin_data.block_header_type.pack(self.header))
-        self.hash = self.header_hash = bitcoin_data.hash256(bitcoin_data.block_header_type.pack(self.header))
+        self.hash = self.header_hash = bitcoin_data.grshash256(bitcoin_data.block_header_type.pack(self.header))
         
         if self.target > net.MAX_TARGET:
             from p2pool import p2p
@@ -318,7 +318,7 @@ class Share(object):
         assert other_tx_hashes2 == other_tx_hashes
         if share_info != self.share_info:
             raise ValueError('share_info invalid')
-        if bitcoin_data.hash256(bitcoin_data.tx_type.pack(gentx)) != self.gentx_hash:
+        if bitcoin_data.singlehash256(bitcoin_data.tx_type.pack(gentx)) != self.gentx_hash:
             raise ValueError('''gentx doesn't match hash_link''')
         
         if bitcoin_data.calculate_merkle_link([None] + other_tx_hashes, 0) != self.merkle_link:

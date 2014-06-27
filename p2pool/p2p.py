@@ -391,7 +391,7 @@ class Protocol(p2protocol.Protocol):
         new_known_txs = dict(self.node.known_txs_var.value)
         warned = False
         for tx in txs:
-            tx_hash = bitcoin_data.hash256(bitcoin_data.tx_type.pack(tx))
+            tx_hash = bitcoin_data.singlehash256(bitcoin_data.tx_type.pack(tx))
             if tx_hash in self.remembered_txs:
                 print >>sys.stderr, 'Peer referenced transaction twice, disconnecting'
                 self.disconnect()

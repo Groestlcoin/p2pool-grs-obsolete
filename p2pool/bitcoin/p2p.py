@@ -115,7 +115,7 @@ class Protocol(p2protocol.Protocol):
         ('block', bitcoin_data.block_type),
     ])
     def handle_block(self, block):
-        block_hash = bitcoin_data.hash256(bitcoin_data.block_header_type.pack(block['header']))
+        block_hash = bitcoin_data.grshash256(bitcoin_data.block_header_type.pack(block['header']))
         self.get_block.got_response(block_hash, block)
         self.get_block_header.got_response(block_hash, block['header'])
     
@@ -125,7 +125,7 @@ class Protocol(p2protocol.Protocol):
     def handle_headers(self, headers):
         for header in headers:
             header = header['header']
-            self.get_block_header.got_response(bitcoin_data.hash256(bitcoin_data.block_header_type.pack(header)), header)
+            self.get_block_header.got_response(bitcoin_data.grshash256(bitcoin_data.block_header_type.pack(header)), header)
         self.factory.new_headers.happened([header['header'] for header in headers])
     
     message_ping = pack.ComposedType([
