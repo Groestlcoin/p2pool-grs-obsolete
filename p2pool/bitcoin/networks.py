@@ -35,7 +35,7 @@ nets = dict(
         ADDRESS_EXPLORER_URL_PREFIX='http://grs.42tx.com/address/',
         TX_EXPLORER_URL_PREFIX='http://grs.42tx.com/tx/',
         SANE_TARGET_RANGE=(2**256//2**32//1000 - 1, 2**256//2**20 - 1),
-        DUMB_SCRYPT_DIFF=1,
+        DUMB_SCRYPT_DIFF=256,
         DUST_THRESHOLD=0.001e8,
     ),
 
@@ -57,7 +57,7 @@ nets = dict(
         ADDRESS_EXPLORER_URL_PREFIX='',
         TX_EXPLORER_URL_PREFIX='',
         SANE_TARGET_RANGE=(2**256//2**32//1000 - 1, 2**256//2**20 - 1),
-        DUMB_SCRYPT_DIFF=1,
+        DUMB_SCRYPT_DIFF=256,
         DUST_THRESHOLD=0.001e8,
     ),
 
