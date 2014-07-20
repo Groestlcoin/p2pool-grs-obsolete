@@ -31,9 +31,9 @@ nets = dict(
         BLOCK_PERIOD=60, # s
         SYMBOL='GRS',
         CONF_FILE_FUNC=lambda: os.path.join(os.path.join(os.environ['APPDATA'], 'GroestlCoin') if platform.system() == 'Windows' else os.path.expanduser('~/Library/Application Support/GroestlCoin/') if platform.system() == 'Darwin' else os.path.expanduser('~/.GroestlCoin'), 'GroestlCoin.conf'),
-        BLOCK_EXPLORER_URL_PREFIX='http://grs.42tx.com/block/',
-        ADDRESS_EXPLORER_URL_PREFIX='http://grs.42tx.com/address/',
-        TX_EXPLORER_URL_PREFIX='http://grs.42tx.com/tx/',
+        BLOCK_EXPLORER_URL_PREFIX='http://chainz.cryptoid.info/grs/block.dws?',
+        ADDRESS_EXPLORER_URL_PREFIX='http://chainz.cryptoid.info/grs/address.dws?',
+        TX_EXPLORER_URL_PREFIX='http://chainz.cryptoid.info/grs/tx.dws?',
         SANE_TARGET_RANGE=(2**256//2**32//1000 - 1, 2**256//2**20 - 1),
         DUMB_SCRYPT_DIFF=256,
         DUST_THRESHOLD=0.001e8,
