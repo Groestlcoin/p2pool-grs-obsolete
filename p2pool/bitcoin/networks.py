@@ -23,7 +23,7 @@ nets = dict(
         ADDRESS_VERSION=36,
         RPC_PORT=1441,
         RPC_CHECK=defer.inlineCallbacks(lambda bitcoind: defer.returnValue(
-            'GroestlCoinaddress' in (yield bitcoind.rpc_help()) and
+            'groestlcoinaddress' in (yield bitcoind.rpc_help()) and
             not (yield bitcoind.rpc_getinfo())['testnet']
         )),
         SUBSIDY_FUNC=lambda nBits, height: __import__('groestlcoin_subsidy').getBlockBaseValue(nBits, height+1),
