@@ -39,6 +39,9 @@ try:
                 'web-static/share.html',
             ]),
         ],
+        install_requires=[
+            'groestlcoin_hash',
+        ],
 
         console=['run_p2pool.py'],
         options=dict(py2exe=dict(
