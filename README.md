@@ -7,6 +7,9 @@ Generic:
 * Twisted >=10.0.0
 * python-argparse (for Python =2.6)
 
+##In Depth guide:
+https://github.com/aleks-azen/p2pool-grs-setupguide
+
 Linux:
 * sudo apt-get install python-zope.interface python-twisted python-twisted-web
 * sudo apt-get install python-argparse # if on Python 2.6
