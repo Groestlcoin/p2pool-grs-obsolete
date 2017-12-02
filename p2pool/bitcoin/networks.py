@@ -30,7 +30,7 @@ nets = dict(
         POW_FUNC=lambda data: pack.IntType(256).unpack(__import__('groestlcoin_hash').getHash(data, 80)),
         BLOCK_PERIOD=60, # s
         SYMBOL='GRS',
-        CONF_FILE_FUNC=lambda: os.path.join(os.path.join(os.environ['APPDATA'], 'GroestlCoin') if platform.system() == 'Windows' else os.path.expanduser('~/Library/Application Support/GroestlCoin/') if platform.system() == 'Darwin' else os.path.expanduser('~/.groestlcoin'), 'groestlcoin.conf'),
+        CONF_FILE_FUNC=lambda: os.path.join(os.path.join(os.environ['APPDATA'], 'Groestlcoin') if platform.system() == 'Windows' else os.path.expanduser('~/Library/Application Support/Groestlcoin/') if platform.system() == 'Darwin' else os.path.expanduser('~/.groestlcoin'), 'groestlcoin.conf'),
         BLOCK_EXPLORER_URL_PREFIX='http://chainz.cryptoid.info/grs/block.dws?',
         ADDRESS_EXPLORER_URL_PREFIX='http://chainz.cryptoid.info/grs/address.dws?',
         TX_EXPLORER_URL_PREFIX='http://chainz.cryptoid.info/grs/tx.dws?',
@@ -52,7 +52,7 @@ nets = dict(
         POW_FUNC=lambda data: pack.IntType(256).unpack(__import__('groestlcoin_hash').getHash(data, 80)),
         BLOCK_PERIOD=60, # s
         SYMBOL='GRS',
-        CONF_FILE_FUNC=lambda: os.path.join(os.path.join(os.environ['APPDATA'], 'GroestlCoin') if platform.system() == 'Windows' else os.path.expanduser('~/Library/Application Support/GroestlCoin/') if platform.system() == 'Darwin' else os.path.expanduser('~/.groestlcoin'), 'groestlcoin.conf'),
+        CONF_FILE_FUNC=lambda: os.path.join(os.path.join(os.environ['APPDATA'], 'Groestlcoin') if platform.system() == 'Windows' else os.path.expanduser('~/Library/Application Support/Groestlcoin/') if platform.system() == 'Darwin' else os.path.expanduser('~/.groestlcoin'), 'groestlcoin.conf'),
         BLOCK_EXPLORER_URL_PREFIX='',
         ADDRESS_EXPLORER_URL_PREFIX='',
         TX_EXPLORER_URL_PREFIX='',
