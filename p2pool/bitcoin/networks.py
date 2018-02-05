@@ -45,17 +45,17 @@ nets = dict(
         ADDRESS_VERSION=111,
         RPC_PORT=17766,
         RPC_CHECK=defer.inlineCallbacks(lambda bitcoind: defer.returnValue(
-            'GroestlCoinaddress' in (yield bitcoind.rpc_help()) and
+            'groestlcoinaddress' in (yield bitcoind.rpc_help()) and
             (yield bitcoind.rpc_getinfo())['testnet']
         )),
         SUBSIDY_FUNC=lambda nBits, height: __import__('groestlcoin_subsidy').getBlockBaseValue(nBits, height+1),
         POW_FUNC=lambda data: pack.IntType(256).unpack(__import__('groestlcoin_hash').getHash(data, 80)),
         BLOCK_PERIOD=60, # s
-        SYMBOL='GRS',
+        SYMBOL='tGRS',
         CONF_FILE_FUNC=lambda: os.path.join(os.path.join(os.environ['APPDATA'], 'Groestlcoin') if platform.system() == 'Windows' else os.path.expanduser('~/Library/Application Support/Groestlcoin/') if platform.system() == 'Darwin' else os.path.expanduser('~/.groestlcoin'), 'groestlcoin.conf'),
-        BLOCK_EXPLORER_URL_PREFIX='',
-        ADDRESS_EXPLORER_URL_PREFIX='',
-        TX_EXPLORER_URL_PREFIX='',
+        BLOCK_EXPLORER_URL_PREFIX='http://chainz.cryptoid.info/grs-test/block.dws?',
+        ADDRESS_EXPLORER_URL_PREFIX='http://chainz.cryptoid.info/grs-test/address.dws?',
+        TX_EXPLORER_URL_PREFIX='http://chainz.cryptoid.info/grs-test/tx.dws?',
         SANE_TARGET_RANGE=(2**256//2**32//1000 - 1, 2**256//2**20 - 1),
         DUMB_SCRYPT_DIFF=256,
         DUST_THRESHOLD=0.001e8,
